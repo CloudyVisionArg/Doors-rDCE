@@ -65,7 +65,7 @@
  			<token>,</token>
 		</tokens>
 	</tokenset>
-	<tokenset name="Keywords" id="keywords" forecolor="blue" fontstyle="bold">
+	<tokenset name="Keywords" id="keywords" forecolor="blue">
 		<validscope name=""/>
 		<validscope name="Scope Keywords"/>
 		<validscope name="Parameter Block"/>
@@ -213,7 +213,7 @@
 			<token>#include</token>
 		</tokens>
 	</tokenset>
-	<tokenset name="Strings" id="strings" type="scope" singlelinescope="yes" forecolor="4194432" fontstyle="bold">
+	<tokenset name="Strings" id="strings" type="scope" singlelinescope="yes" forecolor="maroon">
 		<validscope name=""/>
 		<validscope name="Scope Keywords"/>
 		<validscope name="Parameter Block"/>
@@ -224,7 +224,7 @@
 			<token>"</token>
 		</tokens2>
 	</tokenset>
-	<tokenset name="LongStrings" id="longstrings" type="scope" singlelinescope="no" forecolor="4194432" fontstyle="bold">
+	<tokenset name="LongStrings" id="longstrings" type="scope" singlelinescope="no" forecolor="maroon">
 		<validscope name=""/>
 		<validscope name="Scope Keywords"/>
 		<validscope name="Parameter Block"/>
@@ -269,7 +269,7 @@
 			<token>Xor</token>
 		</tokens>
 	</tokenset>
-	<tokenset name="Constants" id="variables" forecolor="8421440" fontstyle="bold">
+	<tokenset name="Constants" id="variables" forecolor="blue">
 		<validscope name=""/>
 		<validscope name="Scope Keywords"/>
 		<validscope name="Parameter Block"/>

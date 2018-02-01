@@ -1,0 +1,206 @@
+<language name="JavaScript" casesensitive="yes" wordchars="[\w]">
+	<tokenset name="Block Comments" id="blockcomments" type="scope" forecolor="green" fontstyle="italic">
+		<validscope name=""/>
+		<validscope name="Scope Keywords"/>
+		<validscope name="Parameter Block"/>
+		<tokens>
+			<token>/*</token>
+		</tokens>
+		<tokens2>
+			<token>*/</token>
+		</tokens2>
+	</tokenset>
+	<tokenset name="Line Comments" id="linecomments" type="scope" forecolor="green" fontstyle="italic">
+		<validscope name=""/>
+		<validscope name="Scope Keywords"/>
+		<validscope name="Parameter Block"/>
+		<tokens>
+			<token>//</token>
+		</tokens>
+	</tokenset>
+	<tokenset name="Statement Delimiters" id="statementdelims" hidden="yes" inheritfrom="Text">
+		<validscope name=""/>
+		<validscope name="Parameter Block"/>
+		<validscope name="Scope Keywords"/>
+		<tokens>
+			<token action="commitmember">;</token>
+		</tokens>
+	</tokenset>
+	<tokenset name="Scope Keywords" id="scopekeywords" type="scope" autoindent="yes" hidden="yes" inheritfrom="Keywords">
+		<validscope name=""/>
+		<validscope name="Scope Keywords"/>
+		<validscope name="Parameter Block"/>
+		<tokens>
+			<token>{</token>
+		</tokens>
+		<tokens2>
+			<token>}</token>
+		</tokens2>
+	</tokenset>
+	<tokenset name="Parameter Block" id="parameterblocks" type="scope" hidden="yes" inheritfrom="Text">
+		<validscope name=""/>
+		<validscope name="Scope Keywords"/>
+		<validscope name="Parameter Block"/>
+		<tokens>
+ 			<token action="ParameterInfo">(</token>
+		</tokens>
+		<tokens2>
+ 			<token>)</token>
+		</tokens2>
+	</tokenset>
+	<tokenset name="Argument Separators" id="argseparators" hidden="yes" inheritfrom="Text">
+		<validscope name="Parameter Block"/>
+		<tokens>
+ 			<token>,</token>
+		</tokens>
+	</tokenset>
+	<tokenset name="Strings" id="strings" type="scope" singlelinescope="yes" forecolor="maroon">
+		<validscope name=""/>
+		<validscope name="Scope Keywords"/>
+		<validscope name="Parameter Block"/>
+		<tokens>
+			<token>"</token>
+			<token>'</token>
+		</tokens>
+		<tokens2>
+			<token>"</token>
+			<token>'</token>
+		</tokens2>
+	</tokenset>
+	<tokenset name="Escape Sequences" id="escapeseqs" hidden="yes" inheritfrom="Strings">
+		<validscope name="Strings"/>
+		<tokens>
+			<token regexp="yes" rule="">\\.</token>
+		</tokens>
+	</tokenset>
+	<tokenset name="Keywords" id="keywords" forecolor="blue">
+		<validscope name=""/>
+		<validscope name="Scope Keywords"/>
+		<validscope name="Parameter Block"/>
+		<tokens>
+			<token>abstract</token>
+			<token>boolean</token>
+			<token>break</token>
+			<token>byte</token>
+			<token>case</token>
+			<token>catch</token>
+			<token>char</token>
+			<token>class</token>
+			<token>const</token>
+			<token>continue</token>
+			<token>debugger</token>
+			<token>default</token>
+			<token>do</token>
+			<token>double</token>
+			<token>else</token>
+			<token>eval</token>
+			<token>extends</token>
+			<token>false</token>
+			<token>final</token>
+			<token>finally</token>
+			<token>float</token>
+			<token>for</token>
+			<token>function</token>
+			<token>goto</token>
+			<token>if</token>
+			<token>implements</token>
+			<token>import</token>
+			<token>instanceof</token>
+			<token>int</token>
+			<token>interface</token>
+			<token>long</token>
+			<token>native</token>
+			<token>new</token>
+			<token>null</token>
+			<token>package</token>
+			<token>private</token>
+			<token>protected</token>
+			<token>public</token>
+			<token>return</token>
+			<token>short</token>
+			<token>static</token>
+			<token>super</token>
+			<token>switch</token>
+			<token>synchronized</token>
+			<token>this</token>
+			<token>throw</token>
+			<token>throws</token>
+			<token>true</token>
+			<token>transient</token>
+			<token>try</token>
+			<token>var</token>
+			<token>void</token>
+			<token>volatile</token>
+			<token>while</token>
+		</tokens>
+	</tokenset>
+	<tokenset name="Operators" id="operators" forecolor="blue">
+		<validscope name=""/>
+		<validscope name="Scope Keywords"/>
+		<validscope name="Parameter Block"/>
+		<tokens>
+			<token>=</token>
+			<token>&gt;</token>
+			<token>&lt;</token>
+			<token>!</token>
+			<token>~</token>
+			<token>?</token>
+			<token>:</token>
+			<token>==</token>
+			<token>&lt;=</token>
+			<token>&gt;=</token>
+			<token>!=</token>
+			<token>&amp;&amp;</token>
+			<token>||</token>
+			<token>++</token>
+			<token>--</token>
+			<token>+</token>
+			<token>-</token>
+			<token>*</token>
+			<token>/</token>
+			<token>&amp;</token>
+			<token>|</token>
+			<token>^</token>
+			<token>%</token>
+			<token>&lt;&lt;</token>
+			<token>&gt;&gt;</token>
+			<token>&gt;&gt;&gt;</token>
+			<token>+=</token>
+			<token>-=</token>
+			<token>*=</token>
+			<token>/=</token>
+			<token>&amp;=</token>
+			<token>|=</token>
+			<token>^=</token>
+			<token>%=</token>
+			<token>&lt;&lt;=</token>
+			<token>&gt;&gt;=</token>
+			<token>&gt;&gt;&gt;=</token>
+		</tokens>
+	</tokenset>
+	<tokenset name="Numbers" id="numbers">
+		<validscope name=""/>
+		<validscope name="Scope Keywords"/>
+		<validscope name="Parameter Block"/>
+		<tokens>
+			<token regexp="yes">-?\d+(\.\d*)?(e-?\d+)?</token>
+		</tokens>
+	</tokenset>
+	<!--
+	<tokenset name="Hyperlinks" id="hyperlinks" forecolor="blue" fontstyle="underline">
+		<validscope name="Strings"/>
+		<validscope name="Block Comments"/>
+		<validscope name="Line Comments"/>
+		<tokens regexp="yes">
+			<token>file://((\w:)?\w*)([/\\][\w\s\.]+)+([/\\][\w\.]*)+</token>
+			<token>https?://([\.~:?#=\w]+\w+)(/[\.~:?#=\w]+\w)*</token>
+			<token>(ftp|news|telnet|gopher)://[\.~:?#=\w]*\w(\.[\.~:?#=\w]*\w)+</token>
+			<token>mailto:[\w-]+(@[\w-]+(\.?[\w-])*)?</token>
+		</tokens>
+	</tokenset>
+	-->
+	<tokenset name="Text" id="text">
+		<validscope name=""/>
+		<validscope name="Scope Keywords"/>
+	</tokenset>
+</language>

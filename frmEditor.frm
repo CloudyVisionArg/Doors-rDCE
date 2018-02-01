@@ -2,16 +2,16 @@ VERSION 5.00
 Object = "{BCA00000-0F85-414C-A938-5526E9F1E56A}#4.0#0"; "cmax40.dll"
 Begin VB.Form frmEditor 
    Caption         =   "Form1"
-   ClientHeight    =   2904
-   ClientLeft      =   60
-   ClientTop       =   348
-   ClientWidth     =   3876
+   ClientHeight    =   2899
+   ClientLeft      =   65
+   ClientTop       =   351
+   ClientWidth     =   3874
    Icon            =   "frmEditor.frx":0000
    KeyPreview      =   -1  'True
    LinkTopic       =   "Form1"
    MDIChild        =   -1  'True
-   ScaleHeight     =   2904
-   ScaleWidth      =   3876
+   ScaleHeight     =   2899
+   ScaleWidth      =   3874
    WindowState     =   2  'Maximized
    Begin CodeMax4Ctl.CodeMax CodeMax1 
       Height          =   1695
@@ -47,6 +47,20 @@ Private Sub CodeMax1_Change()
 End Sub
 
 Private Sub Form_Activate()
+    Dim sLang As String
+    
+    If TypeName(Folder) = "Folder" Then
+        If Folder.Properties.Exists("DCE_Language") Then
+            sLang = Folder.Properties("DCE_Language").Value
+        End If
+    End If
+
+    If sLang <> "" Then
+        CodeMax1.Language = CMaxLang(sLang)
+    Else
+        CodeMax1.Language = CMaxLang("VBScript")
+    End If
+    
     CodeMax1.SetFocus
 End Sub
 
@@ -62,9 +76,6 @@ Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    Dim bAdd As Boolean
-    Dim lang As CodeMax4Ctl.Language
-    Dim i As Long
     Dim sCMaxVersion As String
     Dim lCMaxRevision As Long
     
@@ -73,24 +84,56 @@ Private Sub Form_Load()
         .DisplayLeftMargin = False
         .Font.Size = 10
         .LineNumbering = True
+    End With
+    
+    'CodeMaxGlobals.Languages.RemoveAll
+    CMaxLoadLang "VBScript", "vbscript.lng"
+    CMaxLoadLang "JavaScript", "js.lng"
+    
+    CodeChanged = False
+End Sub
+
+Private Sub CMaxLoadLang(pLangName As String, pLangFile As String)
+    Dim bAdd As Boolean
+    Dim lang As CodeMax4Ctl.Language
+    Dim i As Long
+    Dim sCMaxVersion As String
+    Dim lCMaxRevision As Long
+    
+    With CodeMax1
         bAdd = True
         For i = 0 To CodeMaxGlobals.Languages.Count - 1
             Set lang = CodeMaxGlobals.Languages(i)
-            If lang.Name = "VBScript" Then
+            If lang.Name = pLangName Then
                 bAdd = False
                 Exit For
             End If
         Next
+        
         If bAdd Then
             Set lang = New CodeMax4Ctl.Language
-            lang.LoadXmlDefinition App.Path & "\vbscript.lng"
+            lang.LoadXmlDefinition App.Path & "\" & pLangFile
             lang.Register
         End If
+        
         CodeMax1.Language = lang
     End With
-
-    CodeChanged = False
 End Sub
+
+Private Function CMaxLang(pLangName As String) As CodeMax4Ctl.Language
+    Dim lang As CodeMax4Ctl.Language
+    Dim i As Long
+    
+    With CodeMax1
+        For i = 0 To CodeMaxGlobals.Languages.Count - 1
+            Set lang = CodeMaxGlobals.Languages(i)
+            If lang.Name = pLangName Then
+                Set CMaxLang = lang
+                Exit For
+            End If
+        Next
+    End With
+End Function
 
 Private Sub Form_Resize()
     On Error Resume Next

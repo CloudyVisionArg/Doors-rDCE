@@ -44,6 +44,7 @@ Source: ..\..\..\..\dep\msscript.ocx; DestDir: {sys}; Flags: regserver sharedfil
 Source: dapihttp.dll; DestDir: {sys}; Flags: regserver sharedfile restartreplace
 Source: ..\rdce.exe; DestDir: {app}\bin
 Source: ..\vbscript.lng; DestDir: {app}\bin
+Source: ..\js.lng; DestDir: {app}\bin
 
 [Icons]
 Name: {group}\Gestar Remote DCE; Filename: {app}\bin\rdce.exe
