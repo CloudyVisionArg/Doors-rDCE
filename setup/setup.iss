@@ -1,6 +1,6 @@
 [Setup]
 AppName=Gestar Remote DCE
-AppVerName=Gestar Remote DCE 7.2.48
+AppVerName=Gestar Remote DCE 7.2.51
 DefaultDirName={pf}\Gestar
 Compression=zip/9
 PrivilegesRequired=admin

@@ -1,12 +1,12 @@
 VERSION 5.00
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
 Begin VB.MDIForm MDIForm1 
    BackColor       =   &H8000000C&
    Caption         =   "MDIForm1"
-   ClientHeight    =   3516
-   ClientLeft      =   192
-   ClientTop       =   816
-   ClientWidth     =   7044
+   ClientHeight    =   3510
+   ClientLeft      =   208
+   ClientTop       =   832
+   ClientWidth     =   7046
    Icon            =   "MDIForm1.frx":0000
    LinkTopic       =   "MDIForm1"
    StartUpPosition =   3  'Windows Default
@@ -14,8 +14,8 @@ Begin VB.MDIForm MDIForm1
    Begin MSComDlg.CommonDialog CommonDialog1 
       Left            =   480
       Top             =   2160
-      _ExtentX        =   847
-      _ExtentY        =   847
+      _ExtentX        =   854
+      _ExtentY        =   854
       _Version        =   393216
    End
    Begin VB.Menu mnuSetup 
@@ -92,6 +92,9 @@ Begin VB.MDIForm MDIForm1
       End
       Begin VB.Menu mnuPopupTreeSelectByModif 
          Caption         =   "Seleccionar por fecha de modificacion"
+      End
+      Begin VB.Menu mnuPopupTreeSelectForms 
+         Caption         =   "Seleccionar Forms que usan"
       End
       Begin VB.Menu mnuPopupTreeUnselectAll 
          Caption         =   "Deseleccionar todo"
@@ -195,6 +198,11 @@ Private Sub mnuPopupTreeSelectByModif_Click()
     frmExplorer.mnuPopupTreeSelectByModifClick
 End Sub
 
+Private Sub mnuPopupTreeSelectForms_Click()
+    If Not mnuSetupCheckboxes.Checked Then mnuSetupCheckboxes_Click
+    frmExplorer.mnuPopupTreeSelectForms
+End Sub
+
 Private Sub mnuPopupTreeUnselectAll_Click()
     If Not mnuSetupCheckboxes.Checked Then mnuSetupCheckboxes_Click
     frmExplorer.mnuPopupTreeUnselectAllClick
@@ -241,7 +249,7 @@ Private Sub mnuSetupGenerate_Click()
     
     sCode = "Return ScriptObjects(Arg(1))"
     
-    GSession.HttpRequestTimeout = 3600 ' 1 hora
+    GSession.HttpRequestTimeout = 7200 ' 2 horas
     Set dom = GSession.HttpCallCode(sCode, Array(GSelected.dom.Xml)).responseXml
     GSession.HttpRequestTimeout = tOut
 
@@ -341,12 +349,18 @@ Private Sub mnuSetupCheckboxes_Click()
 End Sub
 
 Private Sub mnuWindowFileExplorer_Click()
+    On Error GoTo Error
+    
     If Not GSession.LoggedUser.IsAdmin Then
         MsgBox "Solo para administradores", vbInformation
     Else
         frmFileExplorer.Show
         frmFileExplorer.SetFocus
     End If
+
+    Exit Sub
+Error:
+    ErrDisplay Err
 End Sub
 
 Private Sub mnuWindowTile_Click()

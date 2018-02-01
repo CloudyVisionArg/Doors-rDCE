@@ -2,26 +2,26 @@ VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmExplorer 
    Caption         =   "Remote DCE"
-   ClientHeight    =   5904
-   ClientLeft      =   60
-   ClientTop       =   636
-   ClientWidth     =   8340
+   ClientHeight    =   5902
+   ClientLeft      =   65
+   ClientTop       =   637
+   ClientWidth     =   8333
    Icon            =   "frmExplorer.frx":0000
    KeyPreview      =   -1  'True
    LinkTopic       =   "Form1"
    MDIChild        =   -1  'True
-   ScaleHeight     =   5904
-   ScaleWidth      =   8340
+   ScaleHeight     =   5902
+   ScaleWidth      =   8333
    WindowState     =   2  'Maximized
    Begin MSComctlLib.StatusBar StatusBar1 
       Align           =   2  'Align Bottom
-      Height          =   324
+      Height          =   325
       Left            =   0
       TabIndex        =   9
-      Top             =   5580
-      Width           =   8340
-      _ExtentX        =   14711
-      _ExtentY        =   572
+      Top             =   5577
+      Width           =   8333
+      _ExtentX        =   14709
+      _ExtentY        =   577
       Style           =   1
       _Version        =   393216
       BeginProperty Panels {8E3867A5-8586-11D1-B16A-00C0F0283628} 
@@ -37,8 +37,8 @@ Begin VB.Form frmExplorer
       TabStop         =   0   'False
       Top             =   120
       Width           =   7812
-      _ExtentX        =   13780
-      _ExtentY        =   9123
+      _ExtentX        =   13785
+      _ExtentY        =   9121
       Begin rDCE.SplitPanel SplitPanel2 
          Height          =   4452
          Left            =   2640
@@ -46,8 +46,8 @@ Begin VB.Form frmExplorer
          TabStop         =   0   'False
          Top             =   240
          Width           =   4812
-         _ExtentX        =   8488
-         _ExtentY        =   7853
+         _ExtentX        =   8497
+         _ExtentY        =   7851
          Begin VB.CheckBox chkAcl 
             Caption         =   "Acl"
             Height          =   192
@@ -63,8 +63,8 @@ Begin VB.Form frmExplorer
             TabIndex        =   5
             Top             =   2640
             Width           =   1572
-            _ExtentX        =   2773
-            _ExtentY        =   1503
+            _ExtentX        =   2771
+            _ExtentY        =   1501
             View            =   3
             LabelEdit       =   1
             LabelWrap       =   -1  'True
@@ -83,8 +83,8 @@ Begin VB.Form frmExplorer
             TabIndex        =   4
             Top             =   2640
             Width           =   1572
-            _ExtentX        =   2773
-            _ExtentY        =   1503
+            _ExtentX        =   2771
+            _ExtentY        =   1501
             View            =   3
             LabelEdit       =   1
             LabelWrap       =   -1  'True
@@ -103,8 +103,8 @@ Begin VB.Form frmExplorer
             TabIndex        =   6
             Top             =   2400
             Width           =   4092
-            _ExtentX        =   7218
-            _ExtentY        =   3196
+            _ExtentX        =   7227
+            _ExtentY        =   3187
             MultiRow        =   -1  'True
             Placement       =   1
             _Version        =   393216
@@ -126,8 +126,8 @@ Begin VB.Form frmExplorer
             TabIndex        =   2
             Top             =   360
             Width           =   1332
-            _ExtentX        =   2350
-            _ExtentY        =   2138
+            _ExtentX        =   2355
+            _ExtentY        =   2147
             View            =   3
             LabelEdit       =   1
             LabelWrap       =   -1  'True
@@ -146,8 +146,8 @@ Begin VB.Form frmExplorer
             TabIndex        =   1
             Top             =   360
             Width           =   1212
-            _ExtentX        =   2138
-            _ExtentY        =   2138
+            _ExtentX        =   2147
+            _ExtentY        =   2147
             View            =   3
             LabelEdit       =   1
             LabelWrap       =   -1  'True
@@ -166,8 +166,8 @@ Begin VB.Form frmExplorer
             TabIndex        =   3
             Top             =   120
             Width           =   4212
-            _ExtentX        =   7430
-            _ExtentY        =   3831
+            _ExtentX        =   7435
+            _ExtentY        =   3833
             MultiRow        =   -1  'True
             Placement       =   1
             _Version        =   393216
@@ -190,8 +190,8 @@ Begin VB.Form frmExplorer
          TabIndex        =   0
          Top             =   240
          Width           =   2295
-         _ExtentX        =   4043
-         _ExtentY        =   3620
+         _ExtentX        =   4041
+         _ExtentY        =   3625
          _Version        =   393217
          HideSelection   =   0   'False
          LabelEdit       =   1
@@ -531,7 +531,7 @@ Private Sub lstViews_KeyPress(KeyAscii As Integer)
     If KeyAscii = 13 Then lstViews_DblClick
 End Sub
 
-Private Sub lstSyncEvents_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub lstSyncEvents_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If Button = vbRightButton Then
         If Not lstSyncEvents.SelectedItem Is Nothing Then
             Me.PopupMenu MDIForm1.mnuPopup, , , , MDIForm1.mnuPopupEdit
@@ -539,7 +539,7 @@ Private Sub lstSyncEvents_MouseDown(Button As Integer, Shift As Integer, x As Si
     End If
 End Sub
 
-Private Sub lstAsyncEvents_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub lstAsyncEvents_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If Button = vbRightButton Then
         If Not lstAsyncEvents.SelectedItem Is Nothing Then
             Me.PopupMenu MDIForm1.mnuPopup, , , , MDIForm1.mnuPopupEdit
@@ -547,7 +547,7 @@ Private Sub lstAsyncEvents_MouseDown(Button As Integer, Shift As Integer, x As S
     End If
 End Sub
 
-Private Sub lstDocuments_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub lstDocuments_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If Button = vbRightButton Then
         If Not lstDocuments.SelectedItem Is Nothing Then
             Me.PopupMenu MDIForm1.mnuPopup, , , , MDIForm1.mnuPopupEdit
@@ -555,7 +555,7 @@ Private Sub lstDocuments_MouseDown(Button As Integer, Shift As Integer, x As Sin
     End If
 End Sub
 
-Private Sub lstViews_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub lstViews_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If Button = vbRightButton Then
         If Not lstViews.SelectedItem Is Nothing Then
             Me.PopupMenu MDIForm1.mnuPopup, , , , MDIForm1.mnuPopupEdit
@@ -727,7 +727,7 @@ Private Sub lstDocuments_DblClick()
                 .Show
             End With
         Else
-            MsgBox "No tiene codigo", vbExclamation
+            MsgBox "No hay campo de codigo definido", vbExclamation
         End If
     End If
 
@@ -800,7 +800,7 @@ Private Sub TreeView1_KeyPress(KeyAscii As Integer)
     If KeyAscii = 13 Then TreeView1_NodeClick TreeView1.SelectedItem
 End Sub
 
-Private Sub TreeView1_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub TreeView1_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     blnKeyboard = False
     
     If Button = vbRightButton Then
@@ -992,7 +992,9 @@ Private Sub TreeView1_NodeClick(ByVal node As MSComctlLib.node)
         
             ' CodeLib
             If LCase(fld.Form.Guid) = LCase("F89ECD42FAFF48FDA229E4D5C5F433ED") Then
-                Set dom = fld.Search("doc_id,name,code,created,modified", , "name")
+                Set dom = fld.Search("doc_id,name,code,created,modified", , "name", GlngMaxDocs)
+                CheckMaxDocs dom
+                
                 With lstDocuments
                     Set ch = .ColumnHeaders.Add(, , "Code")
                     ch.Width = 2500
@@ -1014,7 +1016,9 @@ Private Sub TreeView1_NodeClick(ByVal node As MSComctlLib.node)
             
             ' Controls
             ElseIf LCase(fld.Form.Guid) = LCase("EAC99A4211204E1D8EEFEB8273174AC4") Then
-                Set dom = fld.Search("doc_id,name,control,scriptbeforerender,created,modified", , "name")
+                Set dom = fld.Search("doc_id,name,control,scriptbeforerender,created,modified", , "name", GlngMaxDocs)
+                CheckMaxDocs dom
+                
                 With lstDocuments
                     Set ch = .ColumnHeaders.Add(, , "Name")
                     ch.Width = 2500
@@ -1078,7 +1082,9 @@ Private Sub TreeView1_NodeClick(ByVal node As MSComctlLib.node)
                     oFList.Add FormPK(fld.Form)
                     oFList.Add "doc_id"
                     
-                    Set dom = fld.Search(oFList.ToString, , sCols)
+                    Set dom = fld.Search(oFList.ToString, , sCols, GlngMaxDocs)
+                    CheckMaxDocs dom
+
                     For Each n In dom.documentElement.childNodes
                         Set li = lstDocuments.ListItems.Add(, "ID=" & n.getAttribute("doc_id"), n.getAttribute(LCase(arr(0))))
                         Set li.Tag = n
@@ -1101,8 +1107,10 @@ Private Sub TreeView1_NodeClick(ByVal node As MSComctlLib.node)
                     oFList.Add "doc_id,subject,created,modified,accessed"
                     oFList.Add FormPK(fld.Form)
                     
-                    GSession.HttpRequestTimeout = 30 ' 30 segs
-                    Set dom = fld.Search(oFList.ToString, , "modified desc")
+                    GSession.HttpRequestTimeout = 60 ' 60 segs
+                    Set dom = fld.Search(oFList.ToString, , "modified desc", GlngMaxDocs)
+                    CheckMaxDocs dom
+
                     GSession.HttpRequestTimeout = tOut
                     
                     With lstDocuments
@@ -1298,6 +1306,10 @@ Public Sub mnuPopupTreeSelectByModifClick()
     SelectItemsRecursive datFrom, datTo
 End Sub
 
+Public Sub mnuPopupTreeSelectForms()
+    MsgBox "TO DO"
+End Sub
+
 Public Sub SelectItemsRecursive(pModifFrom As Date, pModifTo As Date)
     Dim node As MSComctlLib.node
     Dim obj As Object
@@ -1346,6 +1358,7 @@ Public Sub SelectItemsRecursive2(pObject As Object, pModifFrom As Date, pModifTo
     Dim sFormula As String
     Dim frm As Object, fld As Object
     Dim sFields As String
+    Dim datAux As Date
     
     If TypeName(pObject) = "Folder" Then
         
@@ -1371,7 +1384,12 @@ Public Sub SelectItemsRecursive2(pObject As Object, pModifFrom As Date, pModifTo
             If pObject.FolderType = 1 Then ' Documents
                 ' SyncEvents
                 For Each node In pObject.EventsList.documentElement.childNodes
-                    If BetweenDates(node.getAttribute("modified"), pModifFrom, pModifTo) Then
+                    If IsDate(node.getAttribute("modified")) Then
+                        datAux = node.getAttribute("modified")
+                    Else
+                        datAux = pObject.Created
+                    End If
+                    If BetweenDates(datAux, pModifFrom, pModifTo) Then
                         GSelected.AddFolderItem "SyncEvent", pObject, node.getAttribute("id")
                     End If
                 Next
@@ -1389,10 +1407,12 @@ Public Sub SelectItemsRecursive2(pObject As Object, pModifFrom As Date, pModifTo
                 sFields = FormPK(pObject.Form)
                 If sFields <> "" Then sFields = "," & sFields
                 sFields = "doc_id" & sFields
+                
                 For Each node In pObject.Search(sFields, sFormula).documentElement.childNodes
                     GSelected.AddFolderItem "Document", pObject, node
                 Next
                 
+                ' Views
                 For Each node In pObject.ViewsList.documentElement.childNodes
                     If BetweenDates(node.getAttribute("modified"), pModifFrom, pModifTo) Then
                         GSelected.AddFolderItem "View", pObject, node.getAttribute("name")
@@ -1430,6 +1450,14 @@ Public Sub SelectItemsRecursive2(pObject As Object, pModifFrom As Date, pModifTo
             End If
         Next
         
+    End If
+End Sub
+
+Private Sub CheckMaxDocs(ByRef pDom)
+    If pDom.documentElement.childNodes.length >= GlngMaxDocs Then
+        StatusBar1.SimpleText = "Se muestran solo " & GlngMaxDocs & " documentos"
+    Else
+        StatusBar1.SimpleText = pDom.documentElement.childNodes.length & " documentos"
     End If
 End Sub
 
@@ -1498,13 +1526,37 @@ End Sub
 
 Private Sub SelectAll2(pListView As MSComctlLib.ListView, pSelected As Boolean)
     Dim li As MSComctlLib.ListItem
+    Dim treeNode As MSComctlLib.node
+    Dim sPath As String
+    Dim node, childNode
     
-    For Each li In pListView.ListItems
-        If li.Checked <> pSelected Then
-            li.Checked = pSelected
-            CallByName Me, pListView.Name & "_ItemCheck", VbMethod, li
+    If pListView.Name = "lstDocuments" And Not pSelected Then
+        ' Deseleccionar todos los documentos lo proceso de otra forma
+        ' sino quedan docs seleccionados por el limite de registros que se muestran
+        Set treeNode = TreeView1.SelectedItem
+        sPath = GSelected.FolderXPath(Mid(treeNode.Key, 5))
+        Set node = GSelected.dom.selectSingleNode(sPath)
+        
+        If sPath = "/root/system/directory" Then
+            RemoveChildNodes node
+        Else
+            For Each childNode In node.childNodes
+                If childNode.nodeName = "documents" Then node.RemoveChild childNode
+            Next
         End If
-    Next
+        
+        For Each li In pListView.ListItems
+            li.Checked = pSelected
+        Next
+        
+    Else
+        For Each li In pListView.ListItems
+            If li.Checked <> pSelected Then
+                li.Checked = pSelected
+                CallByName Me, pListView.Name & "_ItemCheck", VbMethod, li
+            End If
+        Next
+    End If
 End Sub
 
 Public Sub mnuPopupHistClick()

@@ -20,6 +20,7 @@ Public GSession As Object
 Public GdicURLs As Scripting.Dictionary
 Public GSelected As clsSelected
 Public GstrFileName As String
+Public GlngMaxDocs As Long
 
 Public SyncEventName(1 To 12) As String
 Public dicFolderCache As Scripting.Dictionary
@@ -62,6 +63,13 @@ Sub Main()
     Set GSelected = New clsSelected
     Set dicFolderCache = New Scripting.Dictionary
     Set dicFormCache = New Scripting.Dictionary
+    
+    sAux = ReadIni("Session", "MaxDocs")
+    If IsNumeric(sAux) Then
+        GlngMaxDocs = CLng(sAux)
+    Else
+        GlngMaxDocs = 500
+    End If
     
     On Error Resume Next
     lCMaxRevision = CLng(Split(CodeMaxVersion, ".")(3))
@@ -186,7 +194,7 @@ End Function
 Public Function FormPK(Form As Object) As String
     Dim sPK As String
     
-    sPK = Form.PK
+    sPK = LCase(Form.PK)
     If sPK = "" Then
         If UCase(Form.Guid) = "F89ECD42FAFF48FDA229E4D5C5F433ED" Then ' CodeLib
             sPK = "name"

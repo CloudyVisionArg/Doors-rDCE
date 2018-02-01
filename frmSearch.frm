@@ -2,26 +2,26 @@ VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmSearch 
    Caption         =   "Search"
-   ClientHeight    =   5508
-   ClientLeft      =   60
-   ClientTop       =   348
-   ClientWidth     =   7236
+   ClientHeight    =   5499
+   ClientLeft      =   65
+   ClientTop       =   351
+   ClientWidth     =   7228
    Icon            =   "frmSearch.frx":0000
    KeyPreview      =   -1  'True
    LinkTopic       =   "Form1"
    MDIChild        =   -1  'True
-   ScaleHeight     =   5508
-   ScaleWidth      =   7236
+   ScaleHeight     =   5499
+   ScaleWidth      =   7228
    WindowState     =   2  'Maximized
    Begin MSComctlLib.StatusBar StatusBar1 
       Align           =   2  'Align Bottom
-      Height          =   372
+      Height          =   377
       Left            =   0
       TabIndex        =   3
-      Top             =   5136
-      Width           =   7236
-      _ExtentX        =   12764
-      _ExtentY        =   656
+      Top             =   5122
+      Width           =   7228
+      _ExtentX        =   12746
+      _ExtentY        =   670
       Style           =   1
       _Version        =   393216
       BeginProperty Panels {8E3867A5-8586-11D1-B16A-00C0F0283628} 
@@ -52,8 +52,8 @@ Begin VB.Form frmSearch
       TabIndex        =   2
       Top             =   960
       Width           =   5775
-      _ExtentX        =   10181
-      _ExtentY        =   5525
+      _ExtentX        =   10183
+      _ExtentY        =   5519
       LabelWrap       =   -1  'True
       HideSelection   =   -1  'True
       _Version        =   393217
@@ -203,7 +203,7 @@ Private Sub cmdSearch_Click()
         On Error Resume Next
         Set oRcs = oMaster.OpenRecordset(strSQL)
         errD = Err.Description
-        On Error GoTo 0
+        On Error GoTo Error
         
         If errD <> "" Then
             MsgBox errD, vbExclamation + vbOKOnly
@@ -282,13 +282,23 @@ Private Sub cmdSearch_Click()
         Set frm = FormCache(oRcs(0).Value)
         sCols = frm.Properties("DCE_ListColumns").Value
         sCodeCol = frm.Properties("DCE_CodeColumn").Value
+        
+        On Error Resume Next
         Set dom = frm.Search(strRoots, "DOC_ID,FLD_ID," & sCols, sCodeCol & " like " & GSession.Db.SqlEncode("%" & txtSearch.Text & "%", 1))
-        For Each node In dom.documentElement.childNodes
-            Set li = ListView1.ListItems.Add(, , FolderPath(node.getAttribute("fld_id")))
-            li.ListSubItems.Add , , node.Attributes(2).Value
-            li.ListSubItems.Add , , frm.Name
-            li.ListSubItems.Add , , node.getAttribute("doc_id")
-        Next
+        errD = Err.Description
+        On Error GoTo Error
+        
+        If errD <> "" Then
+            MsgBox errD, vbExclamation + vbOKOnly
+        Else
+            For Each node In dom.documentElement.childNodes
+                Set li = ListView1.ListItems.Add(, , FolderPath(node.getAttribute("fld_id")))
+                li.ListSubItems.Add , , node.Attributes(2).Value
+                li.ListSubItems.Add , , frm.Name
+                li.ListSubItems.Add , , node.getAttribute("doc_id")
+            Next
+        End If
+        
         DoEvents
         If ListView1.ListItems.Count > 0 Then ListView1.SetFocus
         
@@ -436,7 +446,7 @@ Private Sub ListView1_DblClick()
             Set frmCode = New frmEditor
             With frmCode
                 .Caption = "EDIT //Forms/" & frm.Name & "/" & li.ListSubItems(1).Text
-                .CodeMax1.Text = frm.Events(strKey).code
+                .CodeMax1.Text = frm.Events(strKey).Code
                 .CodeType = 2
                 Set .dForm = frm
                 .EventKey = strKey
@@ -449,7 +459,7 @@ Private Sub ListView1_DblClick()
             Set frmCode = New frmEditor
             With frmCode
                 .Caption = "EDIT /" & li.Text & "/" & li.ListSubItems(1).Text
-                .CodeMax1.Text = fld.Events(strKey).code
+                .CodeMax1.Text = fld.Events(strKey).Code
                 .CodeType = 1
                 Set .Folder = fld
                 .EventKey = strKey
@@ -462,7 +472,7 @@ Private Sub ListView1_DblClick()
             Set frmCode = New frmEditor
             With frmCode
                 .Caption = "EDIT /" & li.Text & "/" & li.ListSubItems(1).Text
-                .CodeMax1.Text = fld.AsyncEvents(strKey).code
+                .CodeMax1.Text = fld.AsyncEvents(strKey).Code
                 .CodeType = 4
                 Set .Folder = fld
                 .EventKey = strKey

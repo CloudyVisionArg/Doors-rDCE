@@ -1,7 +1,7 @@
 <%
 ' Compatible con G5.x y G7
 Const Module = "dapihttplistener"
-Const Version = "1.2.39"
+Const Version = "1.2.51"
 
 Dim oReq, blnAux, strAux, lngAux, arrAux
 Dim dSession, strMethod, node
@@ -312,7 +312,7 @@ Sub TryCatch
 		Case "CUSTOMFORM.PK_GET"
 			Set obj = Session(Arg(0))
 			If obj.Properties.Exists("PK") Then
-				Return obj.Properties("PK").Value
+				Return LCase(obj.Properties("PK").Value)
 			Else
 				Return ""
 			End If
@@ -1410,10 +1410,10 @@ Sub ScriptObjects2(ByRef pSelection, ByRef pSb)
 	pSb.Append vbCrLf
 	pSb.Append "dSession.Dispatch ""SyncEventsDisabled"", False" & vbCrLf
 	pSb.Append vbCrLf
-	sb.Append "If IsG7 Then " & vbCrLf
+	sb.Append "If IsG7 Then" & vbCrLf
 	pSb.Append vbTab & "dSession.ClearAllCustomCache" & vbCrLf
 	pSb.Append vbTab & "dSession.ClearObjectModelCache ""ComCodeLibCache""" & vbCrLf
-	sb.Append "End If " &  vbCrLf
+	sb.Append "End If" &  vbCrLf
 	pSb.Append vbCrLf
 	pSb.Append vbCrLf
 	pSb.Append "Dim domAccounts" & vbCrLf
@@ -1450,13 +1450,13 @@ Function ScriptFolder(pFolder)
     
     If pFolder.FolderType = 1 Then
 		sb.Append "sAux = " & VbStringFormat(pFolder.LogConf.Xml) & vbCrLf
-		sb.Append "If IsG7 Then " & vbCrLf
+		sb.Append "If IsG7 Then" & vbCrLf
 		sb.Append vbTab & "Set oDom = dSession.Xml.NewDom()" & vbCrLf
 		sb.Append vbTab & "oDom.loadXML sAux" & vbCrLf
 		sb.Append vbTab & "Set newFolder.LogConf = oDom" & vbCrLf
 		sb.Append "Else" & vbCrLf
 		sb.Append vbTab & "newFolder.LogConf.loadXML sAux" & vbCrLf
-		sb.Append "End If " &  vbCrLf
+		sb.Append "End If" &  vbCrLf
 		sb.Append "newFolder.Form = dSession.Forms(" & VbStringFormat(pFolder.Form.Guid) & ")" & vbCrLf    
         
     ElseIf pFolder.FolderType = 2 Then
@@ -1548,7 +1548,7 @@ Function ScriptAsyncEvent(pEvn)
 	If pEvn.EventType = 0 Then ' TimerEvent
 		sb.Append "oEvn.TimerNextRun = " & VbDateFormat(pEvn.TimerNextRun) & vbCrLf 'todo: este es fecha
 		sb.Append "oEvn.TimerMode = " & pEvn.TimerMode & vbCrLf 'todo: que pasa con los null?
-		sb.Append "oEvn.TimerFrequence = " & pEvn.TimerFrequence & vbCrLf
+		sb.Append "oEvn.TimerFrequence = """ & pEvn.TimerFrequence & """" & vbCrLf
 		sb.Append "oEvn.TimerTime = " & VbStringFormat(pEvn.TimerTime) & vbCrLf
 
 	ElseIf pEvn.EventType = 1 Then ' TriggerEvent
@@ -1603,7 +1603,7 @@ Function ScriptForm(pForm)
 	sb.Append vbTab & "Set oDom = dSession.Xml.NewDom()" & vbCrLf
 	sb.Append vbTab & "oDom.loadXML sAux" & vbCrLf
 	sb.Append vbTab & "Set newForm.Actions = oDom" & vbCrLf
-	sb.Append "Else " & vbCrLf
+	sb.Append "Else" & vbCrLf
     sb.Append vbTab & "newForm.Actions.loadXml sAux" & vbCrLf
 	sb.Append "End If" & vbCrLf
     sb.Append vbCrLf
@@ -1729,7 +1729,7 @@ Function PKFormula(pForm, pDoc)
 	Dim sKey, formula, arr, sGuid
 	
 	sKey = ""
-	If pForm.Properties.Exists("PK") Then sKey = pForm.Properties("PK").Value
+	If pForm.Properties.Exists("PK") Then sKey = LCase(pForm.Properties("PK").Value)
 	If sKey = "" Then
 		sGuid = UCase(pForm.Guid)
 		If sGuid = "F89ECD42FAFF48FDA229E4D5C5F433ED" Then ' CodeLib

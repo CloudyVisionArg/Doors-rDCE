@@ -26,6 +26,7 @@ Public Sub Add(Fields As String)
     
     arr = Split(Fields, ",")
     For i = 0 To UBound(arr)
+        arr(i) = Trim(LCase(arr(i)))
         If Not dicFields.Exists(arr(i)) Then
             dicFields.Add arr(i), Empty
         End If

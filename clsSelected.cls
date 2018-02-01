@@ -71,6 +71,9 @@ Public Function AddFolderItem(ItemType As String, Folder As Variant, item As Var
         sPK = FormPK(fld.Form)
         If sPK = "" Then sPK = "doc_id"
         arr = Split(sPK, ",")
+        For i = 0 To UBound(arr)
+            arr(i) = Trim(LCase(arr(i)))
+        Next
         
         Set contNode = GetContainer(fldNode, "documents")
         Set node = contNode.selectSingleNode(DocumentXPath(Folder, item, True, doc))
@@ -79,7 +82,7 @@ Public Function AddFolderItem(ItemType As String, Folder As Variant, item As Var
             Set node = oDom.createNode("element", "item", "")
             If TypeName(item) = "IXMLDOMElement" Then
                 For i = 0 To UBound(arr)
-                    node.setAttribute arr(i), item.getAttribute(LCase(arr(i)))
+                    node.setAttribute arr(i), item.getAttribute(arr(i))
                 Next
             Else
                 If TypeName(item) = "Document" Then
@@ -333,6 +336,9 @@ Public Function DocumentXPath(Folder As Variant, Document As Variant, Optional W
     sPK = FormPK(fld.Form)
     If sPK = "" Then sPK = "doc_id"
     arr = Split(sPK, ",")
+    For i = 0 To UBound(arr)
+        arr(i) = Trim(LCase(arr(i)))
+    Next
     
     If TypeName(Document) = "IXMLDOMElement" Then
         For i = 0 To UBound(arr)
