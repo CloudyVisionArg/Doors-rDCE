@@ -1,7 +1,7 @@
 <%
 ' Compatible con G5.x y G7
 Const Module = "dapihttplistener"
-Const Version = "1.2.51"
+Const Version = "1.3.17"
 
 Dim oReq, blnAux, strAux, lngAux, arrAux
 Dim dSession, strMethod, node
@@ -184,6 +184,10 @@ Sub TryCatch
 			Set obj = Session(Arg(0))
 			Return obj.Item("ID=" & Arg(1)).Class
 
+		Case "ASYNCEVENT.CLASS_LET"
+			Set obj = Session(Arg(0))
+			obj.Item("ID=" & Arg(2)).Class = CStr(Arg(1))
+
 		Case "ASYNCEVENT.CODE_GET"
 			Set obj = Session(Arg(0))
 			Return obj.Item("ID=" & Arg(1)).Code
@@ -196,33 +200,65 @@ Sub TryCatch
 			Set obj = Session(Arg(0))
 			Return obj.Item("ID=" & Arg(1)).CodeTimeout
 
+		Case "ASYNCEVENT.CODETIMEOUT_LET"
+			Set obj = Session(Arg(0))
+			obj.Item("ID=" & Arg(2)).CodeTimeout = Arg(1)
+
 		Case "ASYNCEVENT.DISABLED_GET"
 			Set obj = Session(Arg(0))
 			Return obj.Item("ID=" & Arg(1)).Disabled
+
+		Case "ASYNCEVENT.DISABLED_LET"
+			Set obj = Session(Arg(0))
+			obj.Item("ID=" & Arg(2)).Disabled = CBool(Arg(1))
 
 		Case "ASYNCEVENT.EVENTTYPE_GET"
 			Set obj = Session(Arg(0))
 			Return obj.Item("ID=" & Arg(1)).EventType
 
+		Case "ASYNCEVENT.EVENTTYPE_LET"
+			Set obj = Session(Arg(0))
+			obj.Item("ID=" & Arg(2)).EventType = CLng(Arg(1))
+
 		Case "ASYNCEVENT.ISCOM_GET"
 			Set obj = Session(Arg(0))
 			Return obj.Item("ID=" & Arg(1)).IsCom
+
+		Case "ASYNCEVENT.ISCOM_LET"
+			Set obj = Session(Arg(0))
+			obj.Item("ID=" & Arg(2)).IsCom = CBool(Arg(1))
 
 		Case "ASYNCEVENT.LOGIN_GET"
 			Set obj = Session(Arg(0))
 			Return obj.Item("ID=" & Arg(1)).Login
 
+		Case "ASYNCEVENT.LOGIN_LET"
+			Set obj = Session(Arg(0))
+			obj.Item("ID=" & Arg(2)).Login = CStr(Arg(1))
+
 		Case "ASYNCEVENT.METHOD_GET"
 			Set obj = Session(Arg(0))
 			Return obj.Item("ID=" & Arg(1)).Method
+
+		Case "ASYNCEVENT.METHOD_LET"
+			Set obj = Session(Arg(0))
+			obj.Item("ID=" & Arg(2)).Method = CStr(Arg(1))
 
 		Case "ASYNCEVENT.PASSWORD_GET"
 			Set obj = Session(Arg(0))
 			Return obj.Item("ID=" & Arg(1)).Password
 
+		Case "ASYNCEVENT.PASSWORD_LET"
+			Set obj = Session(Arg(0))
+			obj.Item("ID=" & Arg(2)).Password = CStr(Arg(1))
+
 		Case "ASYNCEVENT.RECURSIVE_GET"
 			Set obj = Session(Arg(0))
 			Return obj.Item("ID=" & Arg(1)).Recursive
+
+		Case "ASYNCEVENT.RECURSIVE_LET"
+			Set obj = Session(Arg(0))
+			obj.Item("ID=" & Arg(2)).Recursive = CBool(Arg(1))
 
 		Case "ASYNCEVENT.SCRIPT"
 			Set obj = Session(Arg(0))
@@ -232,21 +268,48 @@ Sub TryCatch
 			Set obj = Session(Arg(0))
 			Return obj.Item("ID=" & Arg(1)).TimerFrequence
 
+		Case "ASYNCEVENT.TIMERFREQUENCE_LET"
+			Set obj = Session(Arg(0))
+			obj.Item("ID=" & Arg(2)).TimerMode = CStr(Arg(1))
+
 		Case "ASYNCEVENT.TIMERMODE_GET"
 			Set obj = Session(Arg(0))
 			Return obj.Item("ID=" & Arg(1)).TimerMode
+
+		Case "ASYNCEVENT.TIMERMODE_LET"
+			Set obj = Session(Arg(0))
+			obj.Item("ID=" & Arg(2)).TimerMode = CLng(Arg(1))
 
 		Case "ASYNCEVENT.TIMERNEXTRUN_GET"
 			Set obj = Session(Arg(0))
 			Return obj.Item("ID=" & Arg(1)).TimerNextRun
 
+		Case "ASYNCEVENT.TIMERNEXTRUN_LET"
+			Set obj = Session(Arg(0))
+			obj.Item("ID=" & Arg(2)).TimerNextRun = Arg(1)
+
 		Case "ASYNCEVENT.TIMERTIME_GET"
 			Set obj = Session(Arg(0))
 			Return obj.Item("ID=" & Arg(1)).TimerTime
 
+		Case "ASYNCEVENT.TIMERTIME_LET"
+			Set obj = Session(Arg(0))
+			obj.Item("ID=" & Arg(2)).TimerTime = CStr(Arg(1))
+
 		Case "ASYNCEVENT.TRIGGEREVENT_GET"
 			Set obj = Session(Arg(0))
 			Return obj.Item("ID=" & Arg(1)).TriggerEvent
+
+		Case "ASYNCEVENT.TRIGGEREVENT_LET"
+			Set obj = Session(Arg(0))
+			obj.Item("ID=" & Arg(2)).TriggerEvent = CLng(Arg(1))
+
+'---------------------------
+' Objeto AsyncEventCollection
+
+		Case "ASYNCEVENTCOLLECTION.ADD"
+			Set obj = Session(Arg(0))
+			Return obj.Add().Id
 
 '-------------------		
 ' Objeto Attachment
@@ -265,10 +328,18 @@ Sub TryCatch
 			Set obj = Session(Arg(0))
 			obj.Actions.save Response
 
+		Case "CUSTOMFORM.ACTIONS_LOADXML"
+			Set obj = Session(Arg(0))
+			obj.Actions.loadXml CStr(Arg(1))
+
 		Case "CUSTOMFORM.APPLICATION_GET"
 			Set obj = Session(Arg(0))
 			Return obj.Application
 
+		Case "CUSTOMFORM.APPLICATION_LET"
+			Set obj = Session(Arg(0))
+			obj.Application = CStr(Arg(1))
+			
 		Case "CUSTOMFORM.CREATED_GET"
 			Set obj = Session(Arg(0))
 			Return obj.Created
@@ -277,6 +348,10 @@ Sub TryCatch
 			Set obj = Session(Arg(0))
 			Return obj.Description
 
+		Case "CUSTOMFORM.DESCRIPTION_LET"
+			Set obj = Session(Arg(0))
+			obj.Description = CStr(Arg(1))
+			
 		Case "CUSTOMFORM.EVENTS"
 			Set obj = Session(Arg(0))
 			ReturnCollection obj.Events
@@ -297,6 +372,10 @@ Sub TryCatch
 			Set obj = Session(Arg(0))
 			Return obj.Guid
 
+		Case "CUSTOMFORM.GUID_LET"
+			Set obj = Session(Arg(0))
+			obj.Guid = CStr(Arg(1))
+			
 		Case "CUSTOMFORM.ID_GET"
 			Set obj = Session(Arg(0))
 			Return obj.Id
@@ -309,6 +388,10 @@ Sub TryCatch
 			Set obj = Session(Arg(0))
 			Return obj.Name
 
+		Case "CUSTOMFORM.NAME_LET"
+			Set obj = Session(Arg(0))
+			obj.Name = CStr(Arg(1))
+			
 		Case "CUSTOMFORM.PK_GET"
 			Set obj = Session(Arg(0))
 			If obj.Properties.Exists("PK") Then
@@ -337,6 +420,10 @@ Sub TryCatch
 			Set obj = Session(Arg(0))
 			Return obj.URLRaw
 
+		Case "CUSTOMFORM.URLRAW_LET"
+			Set obj = Session(Arg(0))
+			obj.URLRaw = CStr(Arg(1))
+			
 '-----------
 ' Objeto Db
 
@@ -454,17 +541,33 @@ Sub TryCatch
 			Set obj = Session(Arg(0))
 			Return obj.Item(CStr(Arg(1))).DataLength
 
+		Case "FIELD.DATALENGTH_LET"
+			Set obj = Session(Arg(0))
+			obj.Item(CStr(Arg(2))).DataLength = Arg(1)
+
 		Case "FIELD.DATAPRECISION_GET"
 			Set obj = Session(Arg(0))
 			Return obj.Item(CStr(Arg(1))).DataPrecision
+
+		Case "FIELD.DATAPRECISION_LET"
+			Set obj = Session(Arg(0))
+			obj.Item(CStr(Arg(2))).DataPrecision = Arg(1)
 
 		Case "FIELD.DATASCALE_GET"
 			Set obj = Session(Arg(0))
 			Return obj.Item(CStr(Arg(1))).DataScale
 				
+		Case "FIELD.DATASCALE_LET"
+			Set obj = Session(Arg(0))
+			obj.Item(CStr(Arg(2))).DataScale = Arg(1)
+
 		Case "FIELD.DATATYPE_GET"
 			Set obj = Session(Arg(0))
 			Return obj.Item(CStr(Arg(1))).DataType
+
+		Case "FIELD.DATATYPE_LET"
+			Set obj = Session(Arg(0))
+			obj.Item(CStr(Arg(2))).DataType = Arg(1)
 
 		Case "FIELD.DESCRIPTION_GET"
 			Set obj = Session(Arg(0))
@@ -474,14 +577,26 @@ Sub TryCatch
 			Set obj = Session(Arg(0))
 			Return obj.Item(CStr(Arg(1))).DescriptionRaw
 
+		Case "FIELD.DESCRIPTIONRAW_LET"
+			Set obj = Session(Arg(0))
+			obj.Item(CStr(Arg(2))).DescriptionRaw = CStr(Arg(1))
+
 		Case "FIELD.NULLABLE_GET"
 			Set obj = Session(Arg(0))
 			Return obj.Item(CStr(Arg(1))).Nullable
 				
+		Case "FIELD.NULLABLE_LET"
+			Set obj = Session(Arg(0))
+			obj.Item(CStr(Arg(2))).Nullable = CBool(Arg(1))
+
 		Case "FIELD.PROPERTIES"
 			Set obj = Session(Arg(0))
 			ReturnCollection obj.Item(CStr(Arg(1))).Properties
 
+		Case "FIELD.UPDATABLE_GET"
+			Set obj = Session(Arg(0))
+			Return obj.Item(CStr(Arg(1))).Updatable
+				
 		Case "FIELD.VALUE_GET"
 			Set obj = Session(Arg(0))
 			Return obj.Item(CStr(Arg(1))).Value
@@ -490,6 +605,13 @@ Sub TryCatch
 			Set obj = Session(Arg(0))
 			'dSession.DebugPrint Arg(2) & "=" & Arg(1)
 			obj.Item(CStr(Arg(2))).Value = Arg(1)
+
+'---------------------------
+' Objeto FieldCollection
+
+		Case "FIELDCOLLECTION.ADD"
+			Set obj = Session(Arg(0))
+			obj.Add CStr(Arg(1))
 
 '---------------
 ' Objeto Folder
@@ -624,6 +746,10 @@ Sub TryCatch
 			Set obj = Session(Arg(0))
 			Return obj.Folders(Arg(1))
 
+		Case "FOLDER.FOLDERSNEW"
+			Set obj = Session(Arg(0))
+			Return obj.FoldersNew
+
 		Case "FOLDER.FOLDERSLIST"
 			Set obj = Session(Arg(0))
 			obj.FoldersList.save Response
@@ -631,6 +757,10 @@ Sub TryCatch
 		Case "FOLDER.FOLDERTYPE_GET"
 			Set obj = Session(Arg(0))
 			Return obj.FolderType
+
+		Case "FOLDER.FOLDERTYPE_LET"
+			Set obj = Session(Arg(0))
+			obj.FolderType = CStr(Arg(1))
 
 		Case "FOLDER.FORMID_GET"
 			Set obj = Session(Arg(0))
@@ -640,6 +770,10 @@ Sub TryCatch
 			Set obj = Session(Arg(0))
 			Return obj.Form
 
+		Case "FOLDER.FORM_LET"
+			Set obj = Session(Arg(0))
+			obj.Form = CStr(Arg(1))
+
 		Case "FOLDER.MODIFIED_GET"
 			Set obj = Session(Arg(0))
 			Return obj.Modified
@@ -648,9 +782,17 @@ Sub TryCatch
 			Set obj = Session(Arg(0))
 			Return obj.Name
 
+		Case "FOLDER.NAME_LET"
+			Set obj = Session(Arg(0))
+			obj.Name = CStr(Arg(1))
+
 		Case "FOLDER.LOGCONF"
 			Set obj = Session(Arg(0))
 			obj.LogConf.save Response
+
+		Case "FOLDER.LOGCONF_LOADXML"
+			Set obj = Session(Arg(0))
+			obj.LogConf.loadXml CStr(Arg(1))
 
 		Case "FOLDER.PARENT"
 			Set obj = Session(Arg(0))
@@ -661,6 +803,10 @@ Sub TryCatch
 			'TODO: Cdo se arregle Folder.Path reemplazar con la siguiente linea
 			'Return obj.Path(CLng(Arg(1)))
 			Return FolderPath(obj, Arg(1))
+
+		Case "FOLDER.PROPERTIES"
+			Set obj = Session(Arg(0))
+			ReturnCollection obj.Properties
 
 		Case "FOLDER.SAVE"
 			Set obj = Session(Arg(0))
@@ -714,6 +860,10 @@ Sub TryCatch
 			Set obj = Session(Arg(0))
 			Return obj.Views(Arg(1))
 
+		Case "FOLDER.VIEWSNEW"
+			Set obj = Session(Arg(0))
+			Return obj.ViewsNew
+
 		Case "FOLDER.VIEWSLIST"
 			Set obj = Session(Arg(0))
 			obj.ViewsList.save Response
@@ -732,6 +882,10 @@ Sub TryCatch
 		Case "FOLDEREVENT.OVERRIDES_GET"
 			Set obj = Session(Arg(0))
 			Return obj.Item("ID=" & Arg(1)).Overrides
+
+		Case "FOLDEREVENT.OVERRIDES_LET"
+			Set obj = Session(Arg(0))
+			obj.Item("ID=" & Arg(2)).Overrides = Arg(1)
 
 		Case "FOLDEREVENT.SCRIPT"
 			Set obj = Session(Arg(0))
@@ -752,10 +906,18 @@ Sub TryCatch
 			Set obj = Session(Arg(0))
 			Return obj.Item("ID=" & Arg(1)).Extensible
 
+		Case "FORMEVENT.EXTENSIBLE_LET"
+			Set obj = Session(Arg(0))
+			obj.Item("ID=" & Arg(2)).Extensible = Arg(1)
+
 		Case "FORMEVENT.OVERRIDABLE_GET"
 			Set obj = Session(Arg(0))
 			Return obj.Item("ID=" & Arg(1)).Overridable
 		
+		Case "FORMEVENT.OVERRIDABLE_LET"
+			Set obj = Session(Arg(0))
+			obj.Item("ID=" & Arg(2)).Overridable = Arg(1)
+
 		Case "FORMEVENT.SCRIPT"
 			Set obj = Session(Arg(0))
 			Return ScriptFormEvent(obj.Item("ID=" & Arg(1)))
@@ -822,6 +984,9 @@ Sub TryCatch
 
 		Case "SESSION.FORMS"
 			Return dSession.Forms(Arg(0))
+
+		Case "SESSION.FORMSNEW"
+			Return dSession.FormsNew
 
 		Case "SESSION.INSTANCEGUID"
 			Return dSession.InstanceGuid
@@ -902,6 +1067,10 @@ Sub TryCatch
 			Set obj = Session(Arg(0))
 			Return obj.Comments
 
+		Case "VIEW.COMMENTS_LET"
+			Set obj = Session(Arg(0))
+			obj.Comments = CStr(Arg(1))
+
 		Case "VIEW.COPY"
 			Set obj = Session(Arg(0))
 			Set destObj = Session(CStr(Arg(1)))
@@ -912,6 +1081,10 @@ Sub TryCatch
 			Set obj = Session(Arg(0))
 			obj.Definition.save Response
 
+		Case "VIEW.DEFINITION_LOADXML"
+			Set obj = Session(Arg(0))
+			obj.Definition.loadXml CStr(Arg(1))
+
 		Case "VIEW.DELETE"
 			Set obj = Session(Arg(0))
 			obj.Delete
@@ -920,6 +1093,10 @@ Sub TryCatch
 			Set obj = Session(Arg(0))
 			Return obj.DescriptionRaw
 
+		Case "VIEW.DESCRIPTIONRAW_LET"
+			Set obj = Session(Arg(0))
+			obj.DescriptionRaw = CStr(Arg(1))
+
 		Case "VIEW.ID_GET"
 			Set obj = Session(Arg(0))
 			Return obj.Id
@@ -927,6 +1104,26 @@ Sub TryCatch
 		Case "VIEW.NAME_GET"
 			Set obj = Session(Arg(0))
 			Return obj.Name
+
+		Case "VIEW.NAME_LET"
+			Set obj = Session(Arg(0))
+			obj.Name = CStr(Arg(1))
+
+		Case "VIEW.PRIVATEVIEW_GET"
+			Set obj = Session(Arg(0))
+			Return obj.PrivateView
+
+		Case "VIEW.PRIVATEVIEW_LET"
+			Set obj = Session(Arg(0))
+			obj.PrivateView = CBool(Arg(1))
+
+		Case "VIEW.PROPERTIES"
+			Set obj = Session(Arg(0))
+			ReturnCollection obj.Properties
+
+		Case "VIEW.SAVE"
+			Set obj = Session(Arg(0))
+			obj.Save
 
 		Case "VIEW.SCRIPT"
 			Set obj = Session(Arg(0))
@@ -1410,10 +1607,10 @@ Sub ScriptObjects2(ByRef pSelection, ByRef pSb)
 	pSb.Append vbCrLf
 	pSb.Append "dSession.Dispatch ""SyncEventsDisabled"", False" & vbCrLf
 	pSb.Append vbCrLf
-	sb.Append "If IsG7 Then" & vbCrLf
+	pSb.Append "If IsG7 Then" & vbCrLf
 	pSb.Append vbTab & "dSession.ClearAllCustomCache" & vbCrLf
 	pSb.Append vbTab & "dSession.ClearObjectModelCache ""ComCodeLibCache""" & vbCrLf
-	sb.Append "End If" &  vbCrLf
+	pSb.Append "End If" &  vbCrLf
 	pSb.Append vbCrLf
 	pSb.Append vbCrLf
 	pSb.Append "Dim domAccounts" & vbCrLf
@@ -1650,6 +1847,9 @@ Function ScriptView(pView)
 	sb.Append "oDom.setProperty ""SelectionNamespaces"", ""xmlns:d=""""viewDefinition""""""" & vbCrLf
 	sb.Append "If IsG7 Then" &  vbCrLf
 	sb.Append vbTab & "Set newView.Definition = oDom" & vbCrLf
+	sb.Append vbTab & "Set oDomStyleScript = dSession.Xml.NewDom()" & vbCrLf
+	sb.Append vbTab & "oDomStyleScript.loadXML " & VbStringFormat(pView.StyleScriptDefinition.Xml) & vbCrLf
+	sb.Append vbTab & "Set newView.StyleScriptDefinition = oDomStyleScript" & vbCrLf	
 	sb.Append "Else" & vbCrLf
 	sb.Append vbTab & "oDom.documentElement.removeAttribute(""viewtype"")" & vbCrLf
 	sb.Append vbTab & "For Each node In oDom.selectNodes(""/d:root/d:fields/d:item"")" & vbCrLf
@@ -1781,10 +1981,14 @@ Function ScriptAccount(pAcc)
 	sb.Append "On Error GoTo 0" & vbCrLf
 	sb.Append "If ErrNumber <> 0 Then" & vbCrLf
 	sb.Append vbTab & "Set newAcc = dSession.Directory.AccountsNew(" & pAcc.AccountType & ")" & vbCrLf
+	If pAcc.AccountType = 1 Then ' User
+		sb.Append "Else" & vbCrLf
+		sb.Append vbTab & "Set newAcc = newAcc.Cast2User" & vbCrLf
+	End If
 	sb.Append "End If" & vbCrLf
 	
 	If pAcc.AccountType = 1 Then ' User
-
+	
 		Set oUsr = pAcc.Cast2User
 		sb.Append "newAcc.FullName = " & VbStringFormat(oUsr.FullName) & vbCrLf
 		sb.Append "newAcc.Login = " & VbStringFormat(oUsr.Login) & vbCrLf
