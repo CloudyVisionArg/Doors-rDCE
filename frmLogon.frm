@@ -2,17 +2,17 @@ VERSION 5.00
 Begin VB.Form frmLogon 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Remote DCE - Connection"
-   ClientHeight    =   3576
-   ClientLeft      =   48
-   ClientTop       =   336
-   ClientWidth     =   6048
+   ClientHeight    =   3585
+   ClientLeft      =   45
+   ClientTop       =   330
+   ClientWidth     =   6045
    Icon            =   "frmLogon.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MDIChild        =   -1  'True
    MinButton       =   0   'False
-   ScaleHeight     =   3576
-   ScaleWidth      =   6048
+   ScaleHeight     =   3585
+   ScaleWidth      =   6045
    Begin VB.CommandButton cmdGo 
       Caption         =   "Ir"
       Height          =   336
@@ -293,7 +293,7 @@ Private Sub EnableControls()
         If GSession.IsLogged Then
             txtLogin.Text = GSession.LoggedUser.Login
             cboInstance.Text = GSession.InstanceName
-            MDIForm1.Caption = GSession.InstanceName
+            MDIForm1.Caption = GSession.InstanceName & " v" & App.Major & "." & App.Minor & "." & App.Revision
             
             cboServerURL.Enabled = False
             cmdGo.Enabled = False
