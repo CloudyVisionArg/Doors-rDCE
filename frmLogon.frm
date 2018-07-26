@@ -23,7 +23,9 @@ Begin VB.Form frmLogon
    End
    Begin VB.ComboBox cboServerURL 
       Height          =   288
+      ItemData        =   "frmLogon.frx":058A
       Left            =   1320
+      List            =   "frmLogon.frx":058C
       TabIndex        =   0
       Text            =   "cboServerURL"
       Top             =   240
@@ -214,10 +216,26 @@ Private Sub cmdLogon_Click()
     EnableControls
     GSelected.Clear
     dicFolderCache.RemoveAll
-    
+    SaveServerUrl
     Exit Sub
 Error:
     ErrDisplay Err
+End Sub
+
+Private Sub SaveServerUrl()
+    Dim i As Long
+    Dim sAux As String
+    Dim ses As Object
+    i = 0
+    Do
+        sAux = GdicURLs.Keys(i)
+        If sAux <> "" Then WriteIni "Session", "ServerURL" & i, sAux
+        i = i + 1
+    Loop Until i = GdicURLs.Count Or i = 19 Or sAux = ""
+    Do While i < 19
+        WriteIni "Session", "ServerURL" & i, ""
+        i = i + 1
+    Loop
 End Sub
 
 Private Sub cmdLogoff_Click()
