@@ -225,7 +225,6 @@ End Sub
 Private Sub SaveServerUrl()
     Dim i As Long
     Dim sAux As String
-    Dim ses As Object
     i = 0
     Do
         sAux = GdicURLs.Keys(i)
