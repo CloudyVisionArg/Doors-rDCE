@@ -25,7 +25,7 @@ Begin VB.Form frmLogon
       Height          =   288
       ItemData        =   "frmLogon.frx":058A
       Left            =   1320
-      List            =   "frmLogon.frx":058C
+      List            =   "frmLogon.frx":0591
       TabIndex        =   0
       Text            =   "cboServerURL"
       Top             =   240
