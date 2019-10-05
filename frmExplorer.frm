@@ -368,6 +368,12 @@ Sub LoadTree()
     
     Set oDom = GSession.FoldersTree()
     Set oNodes = oDom.selectNodes("//d:folder")
+	
+	Set oTreeNode = TreeView1.Nodes.Add(, , "FLD-1", "System Folders")
+    oTreeNode.Expanded = True
+    Set oTreeNode = TreeView1.Nodes.Add("FLD-1", tvwChild, "FLD-5", "Forms")
+    Set oTreeNode = TreeView1.Nodes.Add("FLD-1", tvwChild, "FLD-11", "CodeLib")
+    Set oTreeNode = TreeView1.Nodes.Add("FLD-1", tvwChild, "FLD-3", "Directory")
     
     For Each oNode In oNodes
         lngId = oNode.getAttribute("id")
@@ -392,12 +398,6 @@ Sub LoadTree()
             End If
         End If
     Next
-    
-    Set oTreeNode = TreeView1.Nodes.Add(, , "FLD-1", "System Folders")
-    oTreeNode.Expanded = True
-    Set oTreeNode = TreeView1.Nodes.Add("FLD-1", tvwChild, "FLD-5", "Forms")
-    Set oTreeNode = TreeView1.Nodes.Add("FLD-1", tvwChild, "FLD-11", "CodeLib")
-    Set oTreeNode = TreeView1.Nodes.Add("FLD-1", tvwChild, "FLD-3", "Directory")
     
     For Each oNode In GSession.FormsList.documentElement.childNodes
         lngId = oNode.getAttribute("id")
