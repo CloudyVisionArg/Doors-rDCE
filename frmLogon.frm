@@ -2,17 +2,17 @@ VERSION 5.00
 Begin VB.Form frmLogon 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Remote DCE - Connection"
-   ClientHeight    =   3576
-   ClientLeft      =   48
-   ClientTop       =   336
-   ClientWidth     =   6048
+   ClientHeight    =   3585
+   ClientLeft      =   45
+   ClientTop       =   330
+   ClientWidth     =   6045
    Icon            =   "frmLogon.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MDIChild        =   -1  'True
    MinButton       =   0   'False
-   ScaleHeight     =   3576
-   ScaleWidth      =   6048
+   ScaleHeight     =   3585
+   ScaleWidth      =   6045
    Begin VB.CommandButton cmdGo 
       Caption         =   "Ir"
       Height          =   336
@@ -23,7 +23,9 @@ Begin VB.Form frmLogon
    End
    Begin VB.ComboBox cboServerURL 
       Height          =   288
+      ItemData        =   "frmLogon.frx":058A
       Left            =   1320
+      List            =   "frmLogon.frx":0591
       TabIndex        =   0
       Text            =   "cboServerURL"
       Top             =   240
@@ -214,10 +216,25 @@ Private Sub cmdLogon_Click()
     EnableControls
     GSelected.Clear
     dicFolderCache.RemoveAll
-    
+    SaveServerUrl
     Exit Sub
 Error:
     ErrDisplay Err
+End Sub
+
+Private Sub SaveServerUrl()
+    Dim i As Long
+    Dim sAux As String
+    i = 0
+    Do
+        sAux = GdicURLs.Keys(i)
+        If sAux <> "" Then WriteIni "Session", "ServerURL" & i, sAux
+        i = i + 1
+    Loop Until i = GdicURLs.Count Or i = 19 Or sAux = ""
+    Do While i < 19
+        WriteIni "Session", "ServerURL" & i, ""
+        i = i + 1
+    Loop
 End Sub
 
 Private Sub cmdLogoff_Click()
@@ -293,7 +310,7 @@ Private Sub EnableControls()
         If GSession.IsLogged Then
             txtLogin.Text = GSession.LoggedUser.Login
             cboInstance.Text = GSession.InstanceName
-            MDIForm1.Caption = GSession.InstanceName
+            MDIForm1.Caption = GSession.InstanceName & " v" & App.Major & "." & App.Minor & "." & App.Revision
             
             cboServerURL.Enabled = False
             cmdGo.Enabled = False

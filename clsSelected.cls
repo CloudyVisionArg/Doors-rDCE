@@ -340,10 +340,20 @@ Public Function DocumentXPath(Folder As Variant, Document As Variant, Optional W
         arr(i) = Trim(LCase(arr(i)))
     Next
     
+	Dim sNewPK
+    sNewPK = ""
+    
     If TypeName(Document) = "IXMLDOMElement" Then
         For i = 0 To UBound(arr)
-            sPK = "@" & arr(i) & "='" & Document.getAttribute(arr(i)) & "'"
+            Dim nex
+            nex = " and "
+            If sNewPK & "" = "" Then
+                nex = ""
+            End If
+            
+            sNewPK = sNewPK & nex & "@" & arr(i) & "='" & Document.getAttribute(arr(i)) & "'"
         Next
+        sPK = sNewPK
     Else
         If TypeName(Document) = "Document" Then
             DocId = Document.id

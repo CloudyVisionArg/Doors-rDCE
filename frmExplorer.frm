@@ -1,17 +1,17 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
 Begin VB.Form frmExplorer 
    Caption         =   "Remote DCE"
-   ClientHeight    =   5902
-   ClientLeft      =   65
-   ClientTop       =   637
-   ClientWidth     =   8333
+   ClientHeight    =   5910
+   ClientLeft      =   60
+   ClientTop       =   630
+   ClientWidth     =   8340
    Icon            =   "frmExplorer.frx":0000
    KeyPreview      =   -1  'True
    LinkTopic       =   "Form1"
    MDIChild        =   -1  'True
-   ScaleHeight     =   5902
-   ScaleWidth      =   8333
+   ScaleHeight     =   5910
+   ScaleWidth      =   8340
    WindowState     =   2  'Maximized
    Begin MSComctlLib.StatusBar StatusBar1 
       Align           =   2  'Align Bottom
@@ -20,8 +20,8 @@ Begin VB.Form frmExplorer
       TabIndex        =   9
       Top             =   5577
       Width           =   8333
-      _ExtentX        =   14709
-      _ExtentY        =   577
+      _ExtentX        =   14711
+      _ExtentY        =   582
       Style           =   1
       _Version        =   393216
       BeginProperty Panels {8E3867A5-8586-11D1-B16A-00C0F0283628} 
@@ -38,7 +38,7 @@ Begin VB.Form frmExplorer
       Top             =   120
       Width           =   7812
       _ExtentX        =   13785
-      _ExtentY        =   9121
+      _ExtentY        =   9128
       Begin rDCE.SplitPanel SplitPanel2 
          Height          =   4452
          Left            =   2640
@@ -46,8 +46,8 @@ Begin VB.Form frmExplorer
          TabStop         =   0   'False
          Top             =   240
          Width           =   4812
-         _ExtentX        =   8497
-         _ExtentY        =   7851
+         _ExtentX        =   8493
+         _ExtentY        =   7858
          Begin VB.CheckBox chkAcl 
             Caption         =   "Acl"
             Height          =   192
@@ -63,8 +63,8 @@ Begin VB.Form frmExplorer
             TabIndex        =   5
             Top             =   2640
             Width           =   1572
-            _ExtentX        =   2771
-            _ExtentY        =   1501
+            _ExtentX        =   2778
+            _ExtentY        =   1508
             View            =   3
             LabelEdit       =   1
             LabelWrap       =   -1  'True
@@ -83,8 +83,8 @@ Begin VB.Form frmExplorer
             TabIndex        =   4
             Top             =   2640
             Width           =   1572
-            _ExtentX        =   2771
-            _ExtentY        =   1501
+            _ExtentX        =   2778
+            _ExtentY        =   1508
             View            =   3
             LabelEdit       =   1
             LabelWrap       =   -1  'True
@@ -103,8 +103,8 @@ Begin VB.Form frmExplorer
             TabIndex        =   6
             Top             =   2400
             Width           =   4092
-            _ExtentX        =   7227
-            _ExtentY        =   3187
+            _ExtentX        =   7223
+            _ExtentY        =   3175
             MultiRow        =   -1  'True
             Placement       =   1
             _Version        =   393216
@@ -127,7 +127,7 @@ Begin VB.Form frmExplorer
             Top             =   360
             Width           =   1332
             _ExtentX        =   2355
-            _ExtentY        =   2147
+            _ExtentY        =   2143
             View            =   3
             LabelEdit       =   1
             LabelWrap       =   -1  'True
@@ -146,8 +146,8 @@ Begin VB.Form frmExplorer
             TabIndex        =   1
             Top             =   360
             Width           =   1212
-            _ExtentX        =   2147
-            _ExtentY        =   2147
+            _ExtentX        =   2143
+            _ExtentY        =   2143
             View            =   3
             LabelEdit       =   1
             LabelWrap       =   -1  'True
@@ -167,7 +167,7 @@ Begin VB.Form frmExplorer
             Top             =   120
             Width           =   4212
             _ExtentX        =   7435
-            _ExtentY        =   3833
+            _ExtentY        =   3836
             MultiRow        =   -1  'True
             Placement       =   1
             _Version        =   393216
@@ -190,7 +190,7 @@ Begin VB.Form frmExplorer
          TabIndex        =   0
          Top             =   240
          Width           =   2295
-         _ExtentX        =   4041
+         _ExtentX        =   4048
          _ExtentY        =   3625
          _Version        =   393217
          HideSelection   =   0   'False
@@ -368,35 +368,36 @@ Sub LoadTree()
     
     Set oDom = GSession.FoldersTree()
     Set oNodes = oDom.selectNodes("//d:folder")
-    
-    For Each oNode In oNodes
-        lngId = oNode.getAttribute("id")
-        blnSystem = Val(oNode.getAttribute("system") & "")
-        If Not blnSystem Or lngId = 1001 Then
-            If oNode.getAttribute("description") & "" <> "" Then
-                strAux = oNode.getAttribute("description") & " (" & oNode.getAttribute("name") & ")"
-            Else
-                strAux = oNode.getAttribute("name")
-            End If
-            
-            If oNode.getAttribute("parent_folder") & "" = "" Then
-                Set oTreeNode = TreeView1.Nodes.Add(, , "FLD-" & lngId, strAux)
-                oTreeNode.Expanded = True
-            Else
-                Dim prtFolderId As String
-                prtFolderId = oNode.getAttribute("parent_folder")
-                Set oTreeNode = TreeView1.Nodes.Add("FLD-" & prtFolderId, tvwChild, "FLD-" & lngId, strAux)
-            End If
-            oTreeNode.Checked = GSelected.Checked(GSelected.FolderXPath(oNode))
-        
-        End If
-    Next
-    
-    Set oTreeNode = TreeView1.Nodes.Add(, , "FLD-1", "System Folders")
+	
+	Set oTreeNode = TreeView1.Nodes.Add(, , "FLD-1", "System Folders")
     oTreeNode.Expanded = True
     Set oTreeNode = TreeView1.Nodes.Add("FLD-1", tvwChild, "FLD-5", "Forms")
     Set oTreeNode = TreeView1.Nodes.Add("FLD-1", tvwChild, "FLD-11", "CodeLib")
     Set oTreeNode = TreeView1.Nodes.Add("FLD-1", tvwChild, "FLD-3", "Directory")
+    
+    For Each oNode In oNodes
+        lngId = oNode.getAttribute("id")
+        blnSystem = Val(oNode.getAttribute("system") & "")
+        If oNode.getAttribute("parent_folder") & "" <> "1" Then
+            If Not blnSystem Or lngId = 1001 Then
+                If oNode.getAttribute("description") & "" <> "" Then
+                    strAux = oNode.getAttribute("description") & " (" & oNode.getAttribute("name") & ")"
+                Else
+                    strAux = oNode.getAttribute("name")
+                End If
+                
+                If oNode.getAttribute("parent_folder") & "" = "" Then
+                    Set oTreeNode = TreeView1.Nodes.Add(, , "FLD-" & lngId, strAux)
+                    oTreeNode.Expanded = True
+                Else
+                    Dim prtFolderId As String
+                    prtFolderId = oNode.getAttribute("parent_folder")
+                    Set oTreeNode = TreeView1.Nodes.Add("FLD-" & prtFolderId, tvwChild, "FLD-" & lngId, strAux)
+                End If
+                oTreeNode.Checked = GSelected.Checked(GSelected.FolderXPath(oNode))
+            End If
+        End If
+    Next
     
     For Each oNode In GSession.FormsList.documentElement.childNodes
         lngId = oNode.getAttribute("id")

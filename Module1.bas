@@ -53,7 +53,7 @@ Sub Main()
         
     GstrFileName = ""
     
-    For i = 0 To 9
+    For i = 0 To 19
         sAux = ReadIni("Session", "ServerURL" & i)
         If sAux <> "" Then GdicURLs.Add sAux, Empty
     Next
