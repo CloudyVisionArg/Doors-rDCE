@@ -2,16 +2,16 @@ VERSION 5.00
 Begin VB.Form frmLogon 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Remote DCE - Connection"
-   ClientHeight    =   3585
-   ClientLeft      =   45
-   ClientTop       =   330
+   ClientHeight    =   3588
+   ClientLeft      =   39
+   ClientTop       =   325
    ClientWidth     =   6045
    Icon            =   "frmLogon.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MDIChild        =   -1  'True
    MinButton       =   0   'False
-   ScaleHeight     =   3585
+   ScaleHeight     =   3588
    ScaleWidth      =   6045
    Begin VB.CommandButton cmdGo 
       Caption         =   "Ir"
@@ -260,6 +260,7 @@ Private Sub Form_Load()
     
     Caption = "Conexion"
         
+    cboServerURL.Clear
     For Each sIt In GdicURLs
         cboServerURL.AddItem sIt
     Next
