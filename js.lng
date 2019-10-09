@@ -67,6 +67,17 @@
 			<token>'</token>
 		</tokens2>
 	</tokenset>
+	<tokenset name="LongStrings" id="longstrings" type="scope" singlelinescope="no" forecolor="maroon">
+		<validscope name=""/>
+		<validscope name="Scope Keywords"/>
+		<validscope name="Parameter Block"/>
+		<tokens>
+			<token>`</token>
+		</tokens>
+		<tokens2>
+			<token>`</token>
+		</tokens2>
+	</tokenset>
 	<tokenset name="Escape Sequences" id="escapeseqs" hidden="yes" inheritfrom="Strings">
 		<validscope name="Strings"/>
 		<tokens>
