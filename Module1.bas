@@ -55,7 +55,11 @@ Sub Main()
     
     For i = 0 To 19
         sAux = ReadIni("Session", "ServerURL" & i)
-        If sAux <> "" Then GdicURLs.Add sAux, Empty
+        If sAux <> "" Then
+             If Not GdicURLs.Exists(sAux) Then
+                GdicURLs.Add sAux, Empty
+            End If
+        End If
     Next
     
     Set GSession = CreateObject("dapihttp.Session")

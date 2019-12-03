@@ -48,6 +48,7 @@ End Sub
 
 Private Sub Form_Activate()
     Dim sLang As String
+    Dim oLang As Object
     
     If TypeName(Folder) = "Folder" Then
         If Folder.Properties.Exists("DCE_Language") Then
@@ -56,7 +57,12 @@ Private Sub Form_Activate()
     End If
 
     If sLang <> "" Then
-        CodeMax1.Language = CMaxLang(sLang)
+        Set oLang = CMaxLang(sLang)
+        If oLang Is Nothing Then
+            CodeMax1.Language = CMaxLang("VBScript")
+        Else
+            CodeMax1.Language = oLang
+        End If
     Else
         CodeMax1.Language = CMaxLang("VBScript")
     End If

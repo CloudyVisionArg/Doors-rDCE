@@ -1,0 +1,10 @@
+Línea 16: la clase MSComctlLib.StatusBar del control StatusBar1 no era una clase de control cargada.
+Línea 33: la clase rDCE.SplitPanel del control SplitPanel1 no era una clase de control cargada.
+Línea 42: la clase rDCE.SplitPanel del control SplitPanel2 no era una clase de control cargada.
+Línea 60: la clase MSComctlLib.ListView del control lstViews no era una clase de control cargada.
+Línea 80: la clase MSComctlLib.ListView del control lstDocuments no era una clase de control cargada.
+Línea 100: la clase MSComctlLib.TabStrip del control TabStrip2 no era una clase de control cargada.
+Línea 123: la clase MSComctlLib.ListView del control lstAsyncEvents no era una clase de control cargada.
+Línea 143: la clase MSComctlLib.ListView del control lstSyncEvents no era una clase de control cargada.
+Línea 163: la clase MSComctlLib.TabStrip del control TabStrip1 no era una clase de control cargada.
+Línea 187: la clase MSComctlLib.TreeView del control TreeView1 no era una clase de control cargada.
