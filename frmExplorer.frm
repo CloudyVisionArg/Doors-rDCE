@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmExplorer 
    Caption         =   "Remote DCE"
    ClientHeight    =   5910
@@ -365,14 +365,14 @@ Sub LoadTree()
     
     Screen.MousePointer = vbHourglass
     TreeView1.Nodes.Clear
-    
+    Set oTreeNode = TreeView1.Nodes.Add(, , "FLD-1", "System Folders")
+    oTreeNode.Expanded = True
     Set oDom = GSession.FoldersTree()
     Set oNodes = oDom.selectNodes("//d:folder")
-    
     For Each oNode In oNodes
         lngId = oNode.getAttribute("id")
         blnSystem = Val(oNode.getAttribute("system") & "")
-        If oNode.getAttribute("parent_folder") & "" <> "1" Then
+        'If oNode.getAttribute("parent_folder") & "" <> "1" Then
             If Not blnSystem Or lngId = 1001 Then
                 If oNode.getAttribute("description") & "" <> "" Then
                     strAux = oNode.getAttribute("description") & " (" & oNode.getAttribute("name") & ")"
@@ -386,14 +386,21 @@ Sub LoadTree()
                 Else
                     Dim prtFolderId As String
                     prtFolderId = oNode.getAttribute("parent_folder")
-                    Set oTreeNode = TreeView1.Nodes.Add("FLD-" & prtFolderId, tvwChild, "FLD-" & lngId, strAux)
+                    If NodeExists("FLD-" & prtFolderId) Then
+                        If Not NodeExists("FLD-" & lngId) Then
+                            Set oTreeNode = TreeView1.Nodes.Add("FLD-" & prtFolderId, tvwChild, "FLD-" & lngId, strAux)
+                            'oTreeNode.Expanded = True
+                        End If
+                    Else
+                        
+                    End If
                 End If
                 oTreeNode.Checked = GSelected.Checked(GSelected.FolderXPath(oNode))
             End If
-        End If
+        'End If
     Next
     
-    Set oTreeNode = TreeView1.Nodes.Add(, , "FLD-1", "System Folders")
+   
     oTreeNode.Expanded = True
     Set oTreeNode = TreeView1.Nodes.Add("FLD-1", tvwChild, "FLD-5", "Forms")
     Set oTreeNode = TreeView1.Nodes.Add("FLD-1", tvwChild, "FLD-11", "CodeLib")
@@ -416,6 +423,18 @@ Error:
     Screen.MousePointer = vbNormal
     ErrDisplay Err
 End Sub
+
+Private Function NodeExists(ByVal strKey As String) As Boolean
+    Dim node As MSComctlLib.node
+    On Error Resume Next
+    Set node = TreeView1.Nodes(strKey)
+    Select Case Err.Number
+        Case 0
+            NodeExists = True
+        Case Else
+            NodeExists = False
+    End Select
+End Function
 
 Private Sub lstAsyncEvents_GotFocus()
     Set LastFocus = lstAsyncEvents
