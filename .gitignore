@@ -1,5 +1,8 @@
-﻿################################################################################
-# Este archivo .gitignore ha sido creado automáticamente por Microsoft(R) Visual Studio.
+rdce.ini
+rdce.vbw
+.DS_Store
+################################################################################
+# Este archivo .gitignore ha sido creado autom�ticamente por Microsoft(R) Visual Studio.
 ################################################################################
 
 *.suo
